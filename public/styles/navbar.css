@@ -1,0 +1,89 @@
+.animate {
+    -webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+
+.navbar-bootsnipp {
+    background-color: rgb(255, 255, 255);
+	border-color: rgb(148,0,211);
+	border-radius: 0px;
+	margin-bottom: 0px;
+	z-index: 100;
+}
+.navbar-bootsnipp:nth-of-type(2) {
+	border-top-width: 1px;
+	z-index: 50
+}
+
+.navbar-bootsnipp.affix-top {
+	position: absolute;
+	top: 0px;
+	width: 100%;
+}
+.navbar-bootsnipp.affix {
+	top: 0px;
+	width: 100%;
+}
+.navbar-bootsnipp .navbar-brand {
+	color: rgb(148,0,211);
+	font-weight: 900;
+	letter-spacing: 2px;
+	font-family: 'Fjalla One', sans-serif;
+}
+
+.navbar-bootsnipp .navbar-nav > li > a {
+	border: 0px solid rgb(148,0,211);
+	color: rgb(120, 120, 120);
+	padding: 15px 14px;
+}
+
+
+.navbar-bootsnipp .navbar-nav > li:not(.disabled).open > a,
+.navbar-bootsnipp .navbar-nav > li:not(.disabled).active > a,
+.navbar-bootsnipp .navbar-nav > li:not(.disabled) > a:hover, 
+.navbar-bootsnipp .navbar-nav > li:not(.disabled) > a:focus {
+	border-left-width: 4px;
+	color: rgb(148,0,211);
+	padding-left: 10px;
+}
+.navbar-bootsnipp .navbar-nav .selected {
+	border-bottom-width: 0px;
+	color: rgb(148,0,211);
+	padding-left: 10px;
+}
+.navbar-bootsnipp .navbar-nav > li.disabled > a {
+	color: rgb(200, 200, 200);
+}
+
+.nav-padding {
+	padding-top: 61px;
+}
+
+@media screen and (min-width: 768px) {
+    .navbar-bootsnipp .navbar-brand {
+    	font-size: 20px;
+		height: auto;
+		padding: 15px 5px;
+	}
+	.navbar-bootsnipp .navbar-nav > li > a {
+		font-size: 16px;
+		letter-spacing: 1px;
+	}
+	.navbar-bootsnipp .navbar-nav > li:not(.disabled).open > a,
+	.navbar-bootsnipp .navbar-nav > li:not(.disabled).active > a,
+	.navbar-bootsnipp .navbar-nav > li:not(.disabled) > a:hover, 
+	.navbar-bootsnipp .navbar-nav > li:not(.disabled) > a:focus {
+		border-bottom-width: 5px;
+		border-left-width: 0px;
+		padding-bottom: 10px;
+		padding-left: 14px;
+	}
+
+	.navbar-bootsnipp .navbar-nav > li.disabled > a {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+  

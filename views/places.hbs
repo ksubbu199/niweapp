@@ -1,8 +1,8 @@
 {{#each suggestions}}
 <form action='getDetails' method='POST'>
 <label></label><input name='place' type='text' value='{{this.text}}' readonly=true>
-<input type='text' name='magicKey' value='{{this.magicKey}}'>
-<input type='submit'>
+<input type='text' name='magicKey' value='{{this.magicKey}}' style="display:none;">
+<input type='submit' value='Select'>
 </form>
 <br>
 <br>
