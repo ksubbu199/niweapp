@@ -33,6 +33,7 @@ router.post('/getDetails',function(req,res){
     var spatialReference = body.spatialReference;
     extent.spatialReference = spatialReference;
     var stringExtent= JSON.stringify(extent);
+    console.log('http://14.139.172.6:6080/arcgis/rest/services/Solar_Radiation_Map_of_India/MapServer/5/query?f=json&returnGeometry=true&spatialRel=esriSpatialRelIntersects&maxAllowableOffset=38&geometry='+stringExtent+'&geometryType=esriGeometryEnvelope&inSR=102100&outFields=*&outSR=102100');
     request('http://14.139.172.6:6080/arcgis/rest/services/Solar_Radiation_Map_of_India/MapServer/5/query?f=json&returnGeometry=true&spatialRel=esriSpatialRelIntersects&maxAllowableOffset=38&geometry='+stringExtent+'&geometryType=esriGeometryEnvelope&inSR=102100&outFields=*&outSR=102100',function(error,respo,budy){
       res.setHeader('Content-Type', 'application/json');
       res.send(budy);
@@ -40,6 +41,46 @@ router.post('/getDetails',function(req,res){
     })
 
   })
+
+});
+
+function getCordinatesX(cord,dist){
+  var meters = dist;
+  var coef = meters * 0.0000089;
+  var new_lat = cord.lat + coef;
+  var new_long = cord.lang + coef / Math.cos(cord.lat * 0.018);
+  var newCord={
+    lat: new_lat,
+    lang: new_long
+  };
+  return newCord;
+}
+
+
+router.post('/getLatInfo',function(req,res){
+  var lat=parseFloat(req.body.lat);
+  var lang=parseFloat(req.body.long);
+  var cord={
+    lat:lat,
+    lang:lang
+  }
+  console.log(cord);
+  var newCord=getCordinatesX(cord,1000);
+  console.log(newCord);
+  var extent={
+    "xmin": lang,
+    "ymin": lat,
+    "xmax": newCord.lang,
+    "ymax": newCord.lat,
+    "spatialReference":{"wkid":4326,"latestWkid":4326}
+  }
+  var stringExtent= JSON.stringify(extent);
+  console.log('http://14.139.172.6:6080/arcgis/rest/services/Solar_Radiation_Map_of_India/MapServer/5/query?f=json&returnGeometry=true&spatialRel=esriSpatialRelIntersects&maxAllowableOffset=38&geometry='+stringExtent+'&geometryType=esriGeometryEnvelope&inSR=102100&outFields=*&outSR=102100');
+  request('http://14.139.172.6:6080/arcgis/rest/services/Solar_Radiation_Map_of_India/MapServer/5/query?f=json&returnGeometry=true&spatialRel=esriSpatialRelIntersects&maxAllowableOffset=38&geometry='+stringExtent+'&geometryType=esriGeometryEnvelope&inSR=102100&outFields=*&outSR=102100',function(err,resp,body){
+    res.setHeader('Content-Type', 'application/json');
+    res.send(body);
+  });
+
 
 });
 module.exports = router;
