@@ -60,12 +60,13 @@ function getCordinatesX(cord,dist){
 router.post('/getLatInfo',function(req,res){
   var lat=parseFloat(req.body.lat);
   var lang=parseFloat(req.body.long);
+  var dist= parseFloat(Math.sqrt(req.body.area))
   var cord={
     lat:lat,
     lang:lang
   }
   console.log(cord);
-  var newCord=getCordinatesX(cord,1000);
+  var newCord=getCordinatesX(cord,dist);
   console.log(newCord);
   var extent={
     "xmin": lang,
