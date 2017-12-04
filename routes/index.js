@@ -75,11 +75,24 @@ router.post('/getLatInfo',function(req,res){
     "ymax": newCord.lat,
     "spatialReference":{"wkid":4326,"latestWkid":4326}
   }
+  var output={
+    extent: extent
+  }
   var stringExtent= JSON.stringify(extent);
   console.log('http://14.139.172.6:6080/arcgis/rest/services/Solar_Radiation_Map_of_India/MapServer/5/query?f=json&returnGeometry=true&spatialRel=esriSpatialRelIntersects&maxAllowableOffset=38&geometry='+stringExtent+'&geometryType=esriGeometryEnvelope&inSR=102100&outFields=*&outSR=102100');
   request('http://14.139.172.6:6080/arcgis/rest/services/Solar_Radiation_Map_of_India/MapServer/5/query?f=json&returnGeometry=true&spatialRel=esriSpatialRelIntersects&maxAllowableOffset=38&geometry='+stringExtent+'&geometryType=esriGeometryEnvelope&inSR=102100&outFields=*&outSR=102100',function(err,resp,body){
     res.setHeader('Content-Type', 'application/json');
-    res.send(body);
+    body=JSON.parse(body);
+    output.CUF={
+        value: body.features[0].attributes.CUF,
+        units: body.fieldAliases.CUF,
+    };
+    output.AEP={
+        value: body.features[0].attributes.AEP,
+        units: body.fieldAliases.AEP,
+    };
+    res.send(JSON.stringify(output));
+    //output.=body.features[0].attributes.CUF;
   });
 
 
