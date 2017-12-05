@@ -57,10 +57,10 @@ function getCordinatesX(cord,dist){
 }
 
 
-router.post('/getLatInfo',function(req,res){
-  var lat=parseFloat(req.body.lat);
-  var lang=parseFloat(req.body.long);
-  var dist= parseFloat(Math.sqrt(req.body.area))
+router.get('/getLatInfo',function(req,res){
+  var lat=parseFloat(req.query.lat);
+  var lang=parseFloat(req.query.long);
+  var dist= parseFloat(Math.sqrt(req.query.area));
   var cord={
     lat:lat,
     lang:lang
