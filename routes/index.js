@@ -83,26 +83,34 @@ router.get('/getLatInfo',function(req,res){
   request('http://14.139.172.6:6080/arcgis/rest/services/Solar_Radiation_Map_of_India/MapServer/5/query?f=json&returnGeometry=true&spatialRel=esriSpatialRelIntersects&maxAllowableOffset=38&geometry='+stringExtent+'&geometryType=esriGeometryEnvelope&inSR=102100&outFields=*&outSR=102100',function(err,resp,body){
     res.setHeader('Content-Type', 'application/json');
     body=JSON.parse(body);
-    output.CUF={
-        value: body.features[0].attributes.CUF,
-        units: body.fieldAliases.CUF,
-    };
-    output.AEP={
-        value: body.features[0].attributes.AEP,
-        units: body.fieldAliases.AEP,
-    };
-    output.DNI={
-        value: body.features[0].attributes.DNI,
-        units: body.fieldAliases.DNI,
-    };
-    output.GHI={
-        value: body.features[0].attributes.GHI,
-        units: body.fieldAliases.GHI,
-    };
-    output.DHI={
-        value: body.features[0].attributes.DHI,
-        units: body.fieldAliases.DHI,
-    };
+    if(body.features)
+    {
+      output.CUF={
+          value: body.features[0].attributes.CUF,
+          units: body.fieldAliases.CUF,
+      };
+      output.AEP={
+          value: body.features[0].attributes.AEP,
+          units: body.fieldAliases.AEP,
+      };
+      output.DNI={
+          value: body.features[0].attributes.DNI,
+          units: body.fieldAliases.DNI,
+      };
+      output.GHI={
+          value: body.features[0].attributes.GHI,
+          units: body.fieldAliases.GHI,
+      };
+      output.DHI={
+          value: body.features[0].attributes.DHI,
+          units: body.fieldAliases.DHI,
+      };
+    }
+    else {
+      output.error={
+        note: "We got no data here"
+      }
+    }
     res.send(JSON.stringify(output));
     //output.=body.features[0].attributes.CUF;
   });
