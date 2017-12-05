@@ -91,6 +91,18 @@ router.get('/getLatInfo',function(req,res){
         value: body.features[0].attributes.AEP,
         units: body.fieldAliases.AEP,
     };
+    output.DNI={
+        value: body.features[0].attributes.DNI,
+        units: body.fieldAliases.DNI,
+    };
+    output.GHI={
+        value: body.features[0].attributes.GHI,
+        units: body.fieldAliases.GHI,
+    };
+    output.DHI={
+        value: body.features[0].attributes.DHI,
+        units: body.fieldAliases.DHI,
+    };
     res.send(JSON.stringify(output));
     //output.=body.features[0].attributes.CUF;
   });
