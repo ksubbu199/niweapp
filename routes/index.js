@@ -85,6 +85,7 @@ router.get('/getLatInfo',function(req,res){
     body=JSON.parse(body);
     if(body.features)
     {
+      output.error=null;
       output.CUF={
           value: body.features[0].attributes.CUF,
           units: body.fieldAliases.CUF,
@@ -107,9 +108,7 @@ router.get('/getLatInfo',function(req,res){
       };
     }
     else {
-      output.error={
-        note: "We got no data here"
-      }
+      output.error="We got no data here";
     }
     res.send(JSON.stringify(output));
     //output.=body.features[0].attributes.CUF;
