@@ -83,7 +83,7 @@ router.get('/getLatInfo',function(req,res){
   request('http://14.139.172.6:6080/arcgis/rest/services/Solar_Radiation_Map_of_India/MapServer/5/query?f=json&returnGeometry=true&spatialRel=esriSpatialRelIntersects&maxAllowableOffset=38&geometry='+stringExtent+'&geometryType=esriGeometryEnvelope&inSR=102100&outFields=*&outSR=102100',function(err,resp,body){
     res.setHeader('Content-Type', 'application/json');
     body=JSON.parse(body);
-    if(body.features)
+    if(body.features[0])
     {
       output.error=null;
       output.CUF={
